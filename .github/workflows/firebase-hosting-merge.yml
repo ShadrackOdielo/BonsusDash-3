@@ -10,6 +10,9 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/checkout@v4
       - run: pnpm run generate
       - uses: FirebaseExtended/action-hosting-deploy@v0
