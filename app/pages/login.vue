@@ -1,0 +1,67 @@
+<script setup lang="ts">
+import * as z from 'zod'
+import type { FormSubmitEvent } from '@nuxt/ui'
+
+const schema = z.object({
+  email: z.string().email('Invalid email'),
+  password: z.string().min(8, 'Must be at least 8 characters')
+})
+const supabase = useSupabaseClient()
+type Schema = z.output<typeof schema>
+
+const state = reactive<Partial<Schema>>({
+  email: undefined,
+  password: undefined
+})
+
+const toast = useToast()
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  try {
+    // submit the form to supabase
+    const { error } = await supabase.auth.signUp({
+      email: event.data.email,
+      password: event.data.password
+    })
+
+    if (error) {
+      toast.add({ 
+        title: 'Error', 
+        description: error.message, 
+        color: 'error' 
+      })
+      return
+    }
+
+    toast.add({ 
+      title: 'Success', 
+      description: 'The form has been submitted.', 
+      color: 'success' 
+    })
+    console.log(event.data)
+  } catch (e) {
+    toast.add({ 
+      title: 'Error', 
+      description: 'An unexpected error occurred', 
+      color: 'error' 
+    })
+    console.error(e)
+  }
+}
+</script>
+
+<template>
+  <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+    <UFormField label="Email" name="email">
+      <UInput v-model="state.email" />
+    </UFormField>
+
+    <UFormField label="Password" name="password">
+      <UInput v-model="state.password" type="password" />
+    </UFormField>
+
+    <UButton type="submit">
+      Submit
+    </UButton>
+  </UForm>
+</template>
+
