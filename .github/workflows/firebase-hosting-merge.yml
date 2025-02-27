@@ -15,6 +15,7 @@ jobs:
           version: 10
       - uses: actions/checkout@v4
       - run: echo "${{ secrets.SUPABASE_ENV }}" > .env
+      - run: pnpm i && pnpm run build 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
