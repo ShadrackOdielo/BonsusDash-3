@@ -231,7 +231,7 @@ onMounted(async () => {
       <!-- Image Previews -->
       <div v-if="selectedImages.length > 0" class="grid grid-cols-3 gap-4 mt-4">
         <div v-for="(img, index) in selectedImages" :key="index" class="relative group">
-          <NuxtImg :src="img.previewUrl" class="w-full h-24 object-cover rounded-md" />
+          <img :src="img.previewUrl" class="w-full h-24 object-cover rounded-md" />
           <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100">
             <UButton color="error" size="xs" @click="selectedImages.splice(index, 1)">Remove</UButton>
           </div>
