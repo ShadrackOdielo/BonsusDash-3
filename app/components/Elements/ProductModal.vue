@@ -30,7 +30,7 @@ const modal = useModal();
         <div>
           <UCarousel v-if="product?.images?.length" :items="product.images" class="rounded-lg overflow-hidden">
             <template #default="{ item }">
-              <NuxtImg :src="item" class="w-full h-64 object-cover" alt="Product Image" />
+              <img :src="item" class="w-full h-64 object-cover" alt="Product Image" >
             </template>
           </UCarousel>
         </div>

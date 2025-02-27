@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/eslint',
     '@nuxtjs/supabase',
-    '@nuxt/image',
     '@pinia/nuxt'
   ],
   pages: true,
@@ -22,6 +21,10 @@ export default defineNuxtConfig({
 
   future: {
     compatibilityVersion: 4
+  },
+  nitro: {
+    // not failing on error
+    
   },
 
   compatibilityDate: '2024-11-27'
